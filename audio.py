@@ -52,7 +52,7 @@ class Process(QObject):
 			for j in range(1, n + 1):
 				hps[i] *= fft[i * j]
 		
-		return hps
+		return hps.argmax()
 		
 
 

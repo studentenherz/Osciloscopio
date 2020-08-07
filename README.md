@@ -379,4 +379,5 @@ donde $[x]$ es el entero más cercano a $x$.
 
 Con este método se tiene el inconveniente de que, si se utilizan las fecuencias obtenidas a través de una FFT, la menor división de frecuencias siempre minimizará $h$ evaluando a cero.
 
+En el proyecto, la implementeación del cálculo de la frecuencia fundamental estaría en `Process.fundamental_freq()`
 	
