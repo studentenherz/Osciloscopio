@@ -68,6 +68,7 @@ class InputStream(Process):
 		self.rate = rate
 		self.format = format
 		self.channels = channels
+		self.gain = 1
 
 		self.stream = pyaudio_object.open(
 			format=self.format,
@@ -84,8 +85,11 @@ class InputStream(Process):
 
 		return _t, _f
 
+	def set_gain(self, x):
+		self.gain = x
+
 	def callback(self, in_data, frame_count, time_info, status):
-		_time_data = self.get_ndarray_data(in_data, frame_count, self.format)
+		_time_data = self.get_ndarray_data(in_data, frame_count, self.format) * self.gain * 2
 		_fft = self.fft(_time_data)
 
 		self.sig_new_data.emit(_time_data, _fft)

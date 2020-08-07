@@ -128,7 +128,7 @@ El método `get_ndarray_data` recibe la señal como un string binario, la convie
 		return  _fft
 ```
 
-El método `fft` recibe un arreglo con la señal en el dominio de la frecuencia y devuelve un arreglo complejo con la __Transformada Discreta de Fourier__. De todas las frecuencias que calcula la función `numpy.fft.fft` solamente se devuelven los valores positivos, que son los de interés, no hay información nueva en los demás.
+El método `fft` recibe un arreglo con la señal en el dominio de la frecuencia y devuelve un arreglo complejo con la __Transformada Discreta de Fourier__. De todas las frecuencias que calcula la función `numpy.fft.fft` solamente se devuelven los valores positivos, que son los de interés, no hay información nueva en los demás. Este valor es normalizado dividiéndolo entre el tamaño del arreglo al cual se le realizó la transformada.
 
 ###### `InputStream`
 
@@ -354,4 +354,29 @@ A la parte izquierda se tienen los gráficos y a la derecha los controles. De la
 
 ![Interfaz Gráfica de Usuario](img/osc2.png)
 
-Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción.
+Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción. El gráfico de la señal en el dominio de la frecuencia se puede cambiar entre escala lineal y lograrítmica.
+
+### Frecuencia Funamental
+
+Detectar la frecuencia fundamental de la señal no es tarea fácil. No he podido implementarlo, pero aquí expongo algunos métodos.
+
+###### Harmonic Product Spectrum
+
+![HPS](img/HPS.jpg)
+	Figura de https://cnx.org/contents/aY7_vV4-@5.8:i5AAkZCP@2/Pitch-Detection-Algorithms
+
+Este método consiste en, dada la transformada de Fourier de la señal, multiplicarla por la señal con muestreo reducido en factores enteros. La idea es que la frecuencia fundamental se verá favorecida respecto a las demás que serán atenuadas. Luego el fracuencia fundamental sería el máximo resultante.
+
+###### Máximo Común Divisor
+
+Si tenemos componentes de frecuencia $f_1, f_2, ..., f_k$ se puede considerar la frecuencia fundamental como la frecuencia $f$ tal que $f_i = n_i f$ para $i = 1, 2, ..., k$. Entonces la frecuencia fundamental se puede buscar simplemente con el _Máximo Común Divisor_ de las frequencias dadas.
+Como las frecuencias que se obtienen no son en geneal exactamente múltiplos de la frecuencia fundamental, se puede encarar el problema minimizando la función $$g(n_1, n_2, ..., n_k, f) = \sum\limits_{i = 1}^k(f_i - n_i f)^2.$$
+Para eliminar la dependencia de los coeficientes enteros se puede minimizar
+$$
+h(f) =  \sum\limits_{i = 1}^k(f_i/f - [f_i/f])^2
+$$
+donde $[x]$ es el entero más cercano a $x$. 
+
+Con este método se tiene el inconveniente de que, si se utilizan las fecuencias obtenidas a través de una FFT, la menor división de frecuencias siempre minimizará $h$ evaluando a cero.
+
+	

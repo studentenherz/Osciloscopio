@@ -227,7 +227,7 @@ QPushButton:checked {
       </item>
      </layout>
     </widget>
-    <widget class="QDial" name="dial_3">
+    <widget class="QDial" name="in_gain">
      <property name="geometry">
       <rect>
        <x>250</x>
@@ -406,7 +406,7 @@ QPushButton:checked {
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>

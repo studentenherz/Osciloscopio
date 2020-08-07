@@ -153,11 +153,20 @@ class MainWindow(QtWidgets.QMainWindow):
 		#####################################
 		self.out_gain_selector = self.findChild(QtWidgets.QDial, 'gen_dial')
 		def _set_out_gain(x):
-			_gain = (x - self.out_gain_selector.minimum()) / (self.out_gain_selector.maximum() - self.out_gain_selector.minimum())
+			_gain = (x - self.out_gain_selector.minimum()) / (self.out_gain_selector.maximum() - self.out_gain_selector.minimum()) 
 			self.out_stream.set_gain(_gain)
 		self.out_gain_selector.valueChanged.connect(_set_out_gain)
 		self.out_gain_selector.setInvertedControls(True)
 		self.out_gain_selector.setSliderPosition((self.out_gain_selector.maximum() + self.out_gain_selector.minimum())//2)
+
+		self.in_gain_selector = self.findChild(QtWidgets.QDial, 'in_gain')
+		def _set_in_gain(x):
+			_gain = (x - self.in_gain_selector.minimum()) / (self.in_gain_selector.maximum() - self.in_gain_selector.minimum())
+			self.in_stream.set_gain(_gain)
+		self.in_gain_selector.valueChanged.connect(_set_in_gain)
+		self.in_gain_selector.setInvertedControls(True)
+		self.in_gain_selector.setSliderPosition((self.in_gain_selector.maximum() + self.in_gain_selector.minimum())//2)
+		
 
 		##################################
 		# Chunk size selector & binding
