@@ -42,7 +42,7 @@ class Plot(PlotWidget):
 		self.label.setText(self.form % _x)
 
 class Channel:
-	''' A class for the signal channels of the oscilloscope, tu put togethre the adquisition and processing with the visual display '''
+	''' A class for the signal channels of the oscilloscope, to put together the adquisition and processing with the visual display '''
 
 	def __init__(self, time_plot, freq_plot, stream, color):
 
