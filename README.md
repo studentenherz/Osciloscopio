@@ -1,8 +1,11 @@
 # Osciloscopio
 
-Este proyecto es un trabajo para la asignatura de Física Experimental II en el Instituto Balseiro, Argentina.
+Este proyecto es un trabajo para la asignatura de Física Experimental II en el Instituto Balseiro, Argentina. 
 
-### Introcucción
+**Autor:** Michel Romero Rodríguez
+
+
+# Introcucción
 El objetivo de este trabajo es utilizar el sistema de audio de la computadora para:
 - generar ondas de sonido de frecuencia y amplitud ajustable con forma de onda 
 	- senoidal,
@@ -20,7 +23,7 @@ $ source <env_name>/bin/activate
 
 Uno de los múdulos utilizados (y probablemente el fundamental) es [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/docs/), durante su instalación en Windows 10 me econtré con inconvenientes instalándolo directamente de los repositorios de pip; si tiene el mismo problema [esto](https://stackoverflow.com/questions/52283840/i-cant-install-pyaudio-on-windows-how-to-solve-error-microsoft-visual-c-14) puede serle útil.
 
-### Estructura del proyecto
+# Estructura del proyecto
 
 El proyecto consiste de 4 ficheros fundamentales:
 
@@ -346,7 +349,7 @@ La ejecución de la aplicación sucede en este último pedazo de código; se cre
 
 Una vez cerrada la aplicación de Qt se cierran los streams y se termina la instancia de `pyaudio.PyAudio`
 
-### Interfaz
+# Interfaz
 
 ![Interfaz Gráfica de Usuario](img/osc1.png)
 
@@ -356,7 +359,7 @@ A la parte izquierda se tienen los gráficos y a la derecha los controles. De la
 
 Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción. El gráfico de la señal en el dominio de la frecuencia se puede cambiar entre escala lineal y lograrítmica.
 
-### Frecuencia Funamental
+# Frecuencia Funamental
 
 Detectar la frecuencia fundamental de la señal no es tarea fácil. No he podido implementarlo, pero aquí expongo algunos métodos.
 
