@@ -74,8 +74,8 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.play_button = self.findChild(QtWidgets.QPushButton, 'play_sound')
 		def _togle_play():
 			# print('clicked', self.play_button.isChecked())
-			_play_icon = QtGui.QIcon(QtGui.QPixmap('play1.png'))
-			_stop_icon = QtGui.QIcon(QtGui.QPixmap('stop.png'))
+			_play_icon = QtGui.QIcon(QtGui.QPixmap('img/play1.png'))
+			_stop_icon = QtGui.QIcon(QtGui.QPixmap('img/stop.png'))
 			_style = 'QPushButton {background-color: %s; color: white; border-radius: 14px; font-size: 14px}'
 			if self.play_button.isChecked():
 				self.out_stream.play()

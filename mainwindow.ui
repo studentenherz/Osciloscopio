@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>thin_oscilloscope-512.png</normaloff>thin_oscilloscope-512.png</iconset>
+    <normaloff>img/thin_oscilloscope-512.png</normaloff>img/thin_oscilloscope-512.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
@@ -280,7 +280,7 @@ QPushButton:checked {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>play1.png</normaloff>play1.png</iconset>
+       <normaloff>img/play1.png</normaloff>img/play1.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -315,7 +315,7 @@ QPushButton:checked {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>sine.png</normaloff>sine.png</iconset>
+          <normaloff>img/sine.png</normaloff>img/sine.png</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -338,7 +338,7 @@ QPushButton:checked {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>triangular.png</normaloff>triangular.png</iconset>
+          <normaloff>img/triangular.png</normaloff>img/triangular.png</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -358,7 +358,7 @@ QPushButton:checked {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>squared.png</normaloff>squared.png</iconset>
+          <normaloff>img/squared.png</normaloff>img/squared.png</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -381,7 +381,7 @@ QPushButton:checked {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>sawtooth.png</normaloff>sawtooth.png</iconset>
+          <normaloff>img/sawtooth.png</normaloff>img/sawtooth.png</iconset>
         </property>
         <property name="checkable">
          <bool>true</bool>

@@ -348,10 +348,10 @@ Una vez cerrada la aplicación de Qt se cierran los streams y se termina la inst
 
 ### Interfaz
 
-![Interfaz Gráfica de Usuario](osc1.png)
+![Interfaz Gráfica de Usuario](img/osc1.png)
 
 A la parte izquierda se tienen los gráficos y a la derecha los controles. De la captura de audio se puede modificar los parámetro del `rate`, el `chunk`, y el `format`, así com la ganancia.
 
-![Interfaz Gráfica de Usuario](osc2.png)
+![Interfaz Gráfica de Usuario](img/osc2.png)
 
 Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción.
