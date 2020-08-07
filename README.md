@@ -5,7 +5,7 @@ Este proyecto es un trabajo para la asignatura de Física Experimental II en el 
 **Autor:** Michel Romero Rodríguez
 
 
-# Introcucción
+# Introducción
 El objetivo de este trabajo es utilizar el sistema de audio de la computadora para:
 - generar ondas de sonido de frecuencia y amplitud ajustable con forma de onda 
 	- senoidal,
@@ -14,7 +14,7 @@ El objetivo de este trabajo es utilizar el sistema de audio de la computadora pa
 	- y diente de cierra;
 - captar sonido y mostrarlo en tiempo real junto con el espectro en frecuencia.
 
-En este proyecto se utilizó python con este fin. Los paquetes utilizados se detallan en  el fichero `requirements.txt`. Puede crear un entorno virtual de python con los módulos necesarios con las liguientes líneas de comando:
+En este proyecto se utilizó python con este fin. Los paquetes utilizados se detallan en  el fichero `requirements.txt`. Puede crear un entorno virtual de python con los módulos necesarios con las siguientes líneas de comando:
 ```sh
 $ virtualenv <env_name>
 $ source <env_name>/bin/activate
@@ -30,7 +30,7 @@ El proyecto consiste de 4 ficheros fundamentales:
 - `main.py` es el fichero principal como indica el nombre, aquí se instancian las clases necesarias y se corre el programa;
 - `mainwindow.ui` es el archivo XML que contiene el diseño y estilo de la ventana principal de la aplicación;
 - `audio.py` que contiene las clases para la captura y el procesamiento del audio;
-- y `plot.py` que contine las clases para el mostrar las señales y datos en la ventana  principal.
+- y `plot.py` que contiene las clases para el mostrar las señales y datos en la ventana  principal.
 
 Para la interfaz gráfica se utilizó [Qt](https://www.qt.io/), para poder presentar la información sin mucha latencia. El archivo ```mainwindow.ui``` fue creado utilizando el programa de interfaz gráfica [Qt Creator 4.12.4 (Community)](https://www.qt.io/product/development-tools) por lo que no detallaré en este.
 
@@ -52,7 +52,7 @@ class Plot(PlotWidget):
 	#...
 ```
 
-Los gráficos en la aplicación se implementan en la clase `Plot` que hereda de la clase `pyqtgraph.PlotWidget`. En este caso solo se utiliza la herencia para incomporar una opción de mostrar en un label de Qt la pocisión del mouse en caso de estar encima del área del gráfico.
+Los gráficos en la aplicación se implementan en la clase `Plot` que hereda de la clase `pyqtgraph.PlotWidget`. En este caso solo se utiliza la herencia para incorporar una opción de mostrar en un label de Qt la posición del mouse en caso de estar encima del área del gráfico.
 ###### `Channel`
 ```python
 class Channel:
@@ -62,7 +62,7 @@ class Channel:
 		#...
 ```
 
-Luego se implementa la clase `Channel` a la cual se le pasan dos instancias de la clase `Plot` que será donde se mostrará la señal y su espectro, una instancia de la clase `Stream` que se implementó en `audio.py` y de la cual se hablará luego, y un string que representa el color (en hezadecimal o posiblemente un color nombrado válido en Qt) con que se quiere mostrar la señal.
+Luego se implementa la clase `Channel` a la cual se le pasan dos instancias de la clase `Plot` que será donde se mostrará la señal y su espectro, una instancia de la clase `Stream` que se implementó en `audio.py` y de la cual se hablará luego, y un string que representa el color (en hexadecimal o posiblemente un color nombrado válido en Qt) con que se quiere mostrar la señal.
 
 ```python
 		#continuación de Channel.__init__()
@@ -103,7 +103,7 @@ import threading
 from scipy.signal import find_peaks
 
 class Process(QObject):
-	''' Process class that implements the interperetation and prossesing of the data from stream'''
+	''' Process class that implements the interperetation and processing of the data from stream'''
 
 	#...
 
@@ -166,7 +166,7 @@ La clase `InputStream`, que hereda de `Process` implementa un stream de entrada 
 - `format` es el formato en que se lee la señal que establece la profundidad con que se hace la conversión analógica - digital en el **ADC** del sistema,
 - `channels` es la cantidad de canales de la entrada (1: mono, 2: stereo, etc).
 
-Este stream se puede utilizar de dos formas diferentes: _Blocking Mode_ con el cual la captura del audio se produce en la misma línea de ejecución que el resto de la aplicación y _Callback Mode_ que realiza la adquisición y procesa la información en una línea diferente de procesamiento. La mejor opción para evitar que la captura de audio se vea interrumpida por los demás porcesos de la aplicación es la de _Callback_. En la creacción del stream, el parámetro `stream_callback` recibe una función que será llamda cuando se haya adquirido suficientes datos (o se hayan repoducido los que se enviaron en caso de ser un stream de salida).
+Este stream se puede utilizar de dos formas diferentes: _Blocking Mode_ con el cual la captura del audio se produce en la misma línea de ejecución que el resto de la aplicación y _Callback Mode_ que realiza la adquisición y procesa la información en una línea diferente de procesamiento. La mejor opción para evitar que la captura de audio se vea interrumpida por los demás procesos de la aplicación es la de _Callback_. En la creación del stream, el parámetro `stream_callback` recibe una función que será llamada cuando se haya adquirido suficientes datos (o se hayan reproducido los que se enviaron en caso de ser un stream de salida).
 
 ```python
 	#... continuación de la clase InputStream
@@ -180,7 +180,7 @@ Este stream se puede utilizar de dos formas diferentes: _Blocking Mode_ con el c
 
 ```
 
-La función `calback` recibe la data adquirida en formato binario, junto con la cantidad de frames e información extra sobre el tiempo y el estado de repodrucción. Es aquí donde se desempaqueta esta información y se calcula la transformada discreta de fourier de la señal. Se puediera entonce llamar aquí a la función para actualizar los gráficos del `Channel`, sin embargo esto presenta algunos inconvenienes, pues esta función de callback es llamada en un nuevo hilo de ejecución y puede hacer que el programa eventualmente deje de funcionar por colisión de procesos. Es por esto que se implmentó la conexión a través de las señales de Qt `pyqtSignal` (para lo cual se había hecho heredar de la clase `QObject`). 
+La función `calback` recibe la data adquirida en formato binario, junto con la cantidad de frames e información extra sobre el tiempo y el estado de reproducción. Es aquí donde se desempaqueta esta información y se calcula la transformada discreta de fourier de la señal. Se pudiera entonce llamar aquí a la función para actualizar los gráficos del `Channel`, sin embargo esto presenta algunos inconvenientes, pues esta función de callback es llamada en un nuevo hilo de ejecución y puede hacer que el programa eventualmente deje de funcionar por colisión de procesos. Es por esto que se implementó la conexión a través de las señales de Qt `pyqtSignal` (para lo cual se había hecho heredar de la clase `QObject`). 
 
 ```python
 class InputStream(Process):
@@ -200,7 +200,7 @@ La clase `InputStream` posee una señal llamada `sig_new_data` que lleva dos `nd
 		#...
 ```
 
-Cuando se inicializa la clase `Channel`, se conecta la señal `sin_new_data` del `stream` pasado con su método `_update` de modo que cada vez que el stream tenga datos nuevos, se procesarán y luego serán enviados a graficar en el hilo principal de la aplicacion sin interferir en la captura del audio.
+Cuando se inicializa la clase `Channel`, se conecta la señal `sin_new_data` del `stream` pasado con su método `_update` de modo que cada vez que el stream tenga datos nuevos, se procesarán y luego serán enviados a graficar en el hilo principal de la aplicación sin interferir en la captura del audio.
 
 ###### `OutputStream`
 
@@ -279,7 +279,7 @@ Se definieron funciones para generar al audio que se quiere enviar a los parlant
 		self.playing_state = False
 ```
 
-Para implementar la reproducción del sonido era necesario que este lo hiciera en una línea de ejecución que no fuese la principal, en caso de que fuera así se dentendría todo lo demás haciendo el resto de la aplicación inútil. Para esto se creó un hilo de ejecución nuevo utilizando `threading.Thread` que una vez inicial ejecuta un ciclo infinito de reproducción de la señal hasta tanto no se llame al método `stop()` que detiene el loop.
+Para implementar la reproducción del sonido era necesario que este lo hiciera en una línea de ejecución que no fuese la principal, en caso de que fuera así se detendría todo lo demás haciendo el resto de la aplicación inútil. Para esto se creó un hilo de ejecución nuevo utilizando `threading.Thread` que una vez inicial ejecuta un ciclo infinito de reproducción de la señal hasta tanto no se llame al método `stop()` que detiene el loop.
 
 ### `main.py`
 
@@ -357,9 +357,9 @@ A la parte izquierda se tienen los gráficos y a la derecha los controles. De la
 
 ![Interfaz Gráfica de Usuario](img/osc2.png)
 
-Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción. El gráfico de la señal en el dominio de la frecuencia se puede cambiar entre escala lineal y lograrítmica.
+Por los controles de salida se puede regular el tipo de onda, la frecuencia y ganancia, así como el estado de reproducción. El gráfico de la señal en el dominio de la frecuencia se puede cambiar entre escala lineal y logarítmica.
 
-# Frecuencia Funamental
+# Frecuencia Fundamental
 
 Detectar la frecuencia fundamental de la señal no es tarea fácil. No he podido implementarlo, pero aquí expongo algunos métodos.
 
@@ -368,11 +368,11 @@ Detectar la frecuencia fundamental de la señal no es tarea fácil. No he podido
 ![HPS](img/HPS.jpg)
 	Figura de https://cnx.org/contents/aY7_vV4-@5.8:i5AAkZCP@2/Pitch-Detection-Algorithms
 
-Este método consiste en, dada la transformada de Fourier de la señal, multiplicarla por la señal con muestreo reducido en factores enteros. La idea es que la frecuencia fundamental se verá favorecida respecto a las demás que serán atenuadas. Luego el fracuencia fundamental sería el máximo resultante.
+Este método consiste en, dada la transformada de Fourier de la señal, multiplicarla por la señal con muestreo reducido en factores enteros. La idea es que la frecuencia fundamental se verá favorecida respecto a las demás que serán atenuadas. Luego el frecuencia fundamental sería el máximo resultante.
 
 ###### Máximo Común Divisor
 
-Si tenemos componentes de frecuencia $f_1, f_2, ..., f_k$ se puede considerar la frecuencia fundamental como la frecuencia $f$ tal que $f_i = n_i f$ para $i = 1, 2, ..., k$. Entonces la frecuencia fundamental se puede buscar simplemente con el _Máximo Común Divisor_ de las frequencias dadas.
+Si tenemos componentes de frecuencia $f_1, f_2, ..., f_k$ se puede considerar la frecuencia fundamental como la frecuencia $f$ tal que $f_i = n_i f$ para $i = 1, 2, ..., k$. Entonces la frecuencia fundamental se puede buscar simplemente con el _Máximo Común Divisor_ de las frecuencias dadas.
 Como las frecuencias que se obtienen no son en geneal exactamente múltiplos de la frecuencia fundamental, se puede encarar el problema minimizando la función $$g(n_1, n_2, ..., n_k, f) = \sum\limits_{i = 1}^k(f_i - n_i f)^2.$$
 Para eliminar la dependencia de los coeficientes enteros se puede minimizar
 $$
@@ -380,7 +380,7 @@ h(f) =  \sum\limits_{i = 1}^k(f_i/f - [f_i/f])^2
 $$
 donde $[x]$ es el entero más cercano a $x$. 
 
-Con este método se tiene el inconveniente de que, si se utilizan las fecuencias obtenidas a través de una FFT, la menor división de frecuencias siempre minimizará $h$ evaluando a cero.
+Con este método se tiene el inconveniente de que, si se utilizan las frecuencias obtenidas a través de una FFT, la menor división de frecuencias siempre minimizará $h$ evaluando a cero.
 
-En el proyecto, la implementeación del cálculo de la frecuencia fundamental estaría en `Process.fundamental_freq()`
+En el proyecto, la implementación del cálculo de la frecuencia fundamental estaría en `Process.fundamental_freq()`
 	

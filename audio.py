@@ -6,7 +6,7 @@ import threading
 from scipy.signal import find_peaks
 
 class Process(QObject):
-	''' Process class that implements the interperetation and prossesing of the data from stream'''
+	''' Process class that implements the interperetation and processing of the data from stream'''
 
 	struct_types = {
 		pyaudio.paInt32: 'l',
